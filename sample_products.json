@@ -1,0 +1,44 @@
+[
+  {
+    "name": "Wireless Headphones",
+    "category": "Electronics",
+    "price": 2499.0,
+    "stock": 18,
+    "description": "Comfortable over-ear headphones with clear sound and a long-lasting battery."
+  },
+  {
+    "name": "Bluetooth Speaker",
+    "category": "Electronics",
+    "price": 1799.0,
+    "stock": 12,
+    "description": "A compact portable speaker for music at home or on the move."
+  },
+  {
+    "name": "Everyday Backpack",
+    "category": "Accessories",
+    "price": 1299.0,
+    "stock": 25,
+    "description": "A lightweight backpack with useful compartments for everyday essentials."
+  },
+  {
+    "name": "Classic Wristwatch",
+    "category": "Accessories",
+    "price": 2199.0,
+    "stock": 8,
+    "description": "A simple everyday watch with a clean dial and comfortable strap."
+  },
+  {
+    "name": "Cotton T-Shirt",
+    "category": "Fashion",
+    "price": 599.0,
+    "stock": 40,
+    "description": "A soft cotton T-shirt designed for comfortable daily wear."
+  },
+  {
+    "name": "Desk Lamp",
+    "category": "Home",
+    "price": 899.0,
+    "stock": 15,
+    "description": "An adjustable desk lamp that provides focused light for reading and work."
+  }
+]
