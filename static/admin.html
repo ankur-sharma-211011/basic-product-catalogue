@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Admin - Visitor Activity</title>
+<style>
+*{box-sizing:border-box}body{margin:0;font-family:Arial,sans-serif;background:#f4f6f8;color:#243b53}
+header{background:#243b53;color:white;padding:24px max(5%,calc((100% - 1100px)/2))}
+header h1{margin:0 0 7px;font-size:25px}header p{margin:0;color:#d9e2ec}
+main{max-width:1100px;margin:28px auto;padding:0 20px}.top{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:18px}
+.summary{background:white;border:1px solid #e1e5e9;border-radius:9px;padding:18px 22px;min-width:220px}
+.summary span{display:block;color:#627d98;font-size:13px}.summary strong{display:block;font-size:30px;margin-top:5px}
+button{border:0;border-radius:6px;padding:11px 15px;background:#2563a6;color:white;cursor:pointer}
+.table-wrap{background:white;border:1px solid #e1e5e9;border-radius:9px;overflow:auto}
+table{width:100%;border-collapse:collapse;min-width:680px}th,td{text-align:left;padding:14px 16px;border-bottom:1px solid #edf0f2;font-size:14px}
+th{background:#eaf0f6;color:#486581;font-size:12px;text-transform:uppercase;letter-spacing:.04em}
+tr:last-child td{border-bottom:0}.muted,.status{color:#627d98;font-size:13px}.empty{text-align:center;padding:25px;color:#627d98}
+footer{padding:25px;text-align:center}a{color:#2563a6}
+</style></head>
+<body>
+<header><h1>Visitor activity</h1><p>Unique IP addresses and their estimated countries</p></header>
+<main>
+<div class="top"><div class="summary"><span>Total unique IP addresses</span><strong id="total">—</strong></div><button id="refresh">Refresh now</button></div>
+<p class="muted">This table refreshes automatically every 5 seconds.</p>
+<div class="table-wrap"><table><thead><tr><th>IP address</th><th>Country</th><th>Requests</th><th>First seen</th><th>Last seen</th></tr></thead>
+<tbody id="visitor-rows"><tr><td colspan="5" class="empty">Loading visitor data...</td></tr></tbody></table></div>
+<p class="status" id="status">Connecting...</p></main><footer><a href="/">Back to store</a></footer>
+<script>
+const total=document.getElementById("total"),rows=document.getElementById("visitor-rows"),statusText=document.getElementById("status");
+function formatDate(v){return v?new Date(v).toLocaleString():"—";}
+function addCell(row,value){const cell=document.createElement("td");cell.textContent=value;row.appendChild(cell);}
+async function refreshVisitors(){
+ try{
+  const response=await fetch("/api/admin/visitors",{cache:"no-store"});
+  if(!response.ok)throw new Error("Could not load visitor data (HTTP "+response.status+")");
+  const data=await response.json();total.textContent=data.total_unique_ips;rows.replaceChildren();
+  if(!data.visitors.length){const row=document.createElement("tr"),cell=document.createElement("td");cell.colSpan=5;cell.className="empty";cell.textContent="No visitor requests recorded yet. Open the store in another tab.";row.appendChild(cell);rows.appendChild(row);}
+  else data.visitors.forEach(v=>{const row=document.createElement("tr");addCell(row,v.ip_address);addCell(row,v.country);addCell(row,v.request_count);addCell(row,formatDate(v.first_seen));addCell(row,formatDate(v.last_seen));rows.appendChild(row);});
+  statusText.textContent="Last updated: "+new Date().toLocaleTimeString();
+ }catch(error){statusText.textContent=error.message;}
+}
+document.getElementById("refresh").addEventListener("click",refreshVisitors);refreshVisitors();setInterval(refreshVisitors,5000);
+</script></body></html>

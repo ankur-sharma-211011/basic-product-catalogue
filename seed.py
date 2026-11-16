@@ -1,9 +1,11 @@
 import json
+from pathlib import Path
 from database import get_connection, create_table
 
+BASE_DIR = Path(__file__).resolve().parent
 create_table()
 
-with open("sample_products.json", encoding="utf-8") as file:
+with open(BASE_DIR / "sample_products.json", encoding="utf-8") as file:
     products = json.load(file)
 
 with get_connection() as connection:

@@ -1,8 +1,9 @@
 CREATE TABLE IF NOT EXISTS products (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    name TEXT NOT NULL,
-    category TEXT NOT NULL,
-    price REAL NOT NULL CHECK(price >= 0),
-    stock INTEGER NOT NULL CHECK(stock >= 0),
-    description TEXT NOT NULL
+ id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT NOT NULL, category TEXT NOT NULL,
+ price REAL NOT NULL CHECK(price >= 0), stock INTEGER NOT NULL CHECK(stock >= 0),
+ description TEXT NOT NULL
+);
+CREATE TABLE IF NOT EXISTS visitor_log (
+ ip_address TEXT PRIMARY KEY, country TEXT NOT NULL,
+ request_count INTEGER NOT NULL DEFAULT 1, first_seen TEXT NOT NULL, last_seen TEXT NOT NULL
 );

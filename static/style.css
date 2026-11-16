@@ -1,0 +1,235 @@
+
+/* Default appearance settings */
+:root {
+    --bg-color: #f4f6f8;
+    --surface-color: #ffffff;
+    --text-color: #222222;
+    --muted-color: #627d98;
+    --header-color: #243b53;
+    --accent-color: #2563a6;
+    --border-color: #e1e5e9;
+    --input-border: #cbd2d9;
+    --picture-color: #eaf0f6;
+    --font-size: 16px;
+    --card-radius: 9px;
+}
+
+/* Dark theme */
+[data-theme="dark"] {
+    --bg-color: #111827;
+    --surface-color: #1f2937;
+    --text-color: #f9fafb;
+    --muted-color: #cbd5e1;
+    --header-color: #0f172a;
+    --border-color: #374151;
+    --input-border: #4b5563;
+    --picture-color: #374151;
+}
+
+/* Warm theme */
+[data-theme="warm"] {
+    --bg-color: #fff7ed;
+    --surface-color: #ffffff;
+    --text-color: #431407;
+    --muted-color: #9a3412;
+    --header-color: #7c2d12;
+    --border-color: #fed7aa;
+    --input-border: #fdba74;
+    --picture-color: #ffedd5;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    font-size: var(--font-size);
+    background: var(--bg-color);
+    color: var(--text-color);
+    transition: background 0.2s, color 0.2s;
+}
+
+header {
+    background: var(--header-color);
+    color: white;
+    padding: 22px max(5%, calc((100% - 1100px) / 2));
+}
+
+header h1 {
+    margin: 0 0 6px;
+    font-size: 25px;
+}
+
+header p {
+    margin: 0;
+    color: #d9e2ec;
+}
+
+main {
+    max-width: 1100px;
+    margin: 28px auto;
+    padding: 0 20px;
+}
+
+/* Appearance panel */
+.appearance {
+    background: var(--surface-color);
+    border: 1px solid var(--border-color);
+    border-radius: var(--card-radius);
+    padding: 18px;
+    margin-bottom: 22px;
+}
+
+.appearance h2 {
+    margin: 0 0 15px;
+    font-size: 18px;
+}
+
+.appearance-controls {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: end;
+    gap: 15px;
+}
+
+.appearance-controls label {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    font-size: 13px;
+    color: var(--muted-color);
+}
+
+.appearance-controls input[type="color"] {
+    width: 65px;
+    height: 38px;
+    padding: 3px;
+}
+
+.filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 22px;
+}
+
+input,
+select {
+    padding: 11px;
+    border: 1px solid var(--input-border);
+    border-radius: 6px;
+    font-size: 14px;
+    background: var(--surface-color);
+    color: var(--text-color);
+}
+
+input {
+    flex: 1;
+    min-width: 200px;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 16px;
+}
+
+.card {
+    background: var(--surface-color);
+    border: 1px solid var(--border-color);
+    border-radius: var(--card-radius);
+    padding: 18px;
+    transition: border-radius 0.2s, background 0.2s;
+}
+
+.picture {
+    height: 105px;
+    display: grid;
+    place-items: center;
+    background: var(--picture-color);
+    border-radius: var(--card-radius);
+    font-size: 40px;
+    margin-bottom: 14px;
+}
+
+.card h3 {
+    margin: 4px 0 8px;
+    font-size: 17px;
+}
+
+.category {
+    color: var(--muted-color);
+    font-size: 13px;
+}
+
+.price {
+    font-size: 19px;
+    font-weight: bold;
+    margin: 12px 0;
+}
+
+button {
+    border: 0;
+    background: var(--accent-color);
+    color: white;
+    padding: 10px 14px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+button:hover {
+    opacity: 0.88;
+}
+
+.reset-button {
+    background: #64748b;
+}
+
+.empty {
+    background: var(--surface-color);
+    padding: 25px;
+    border-radius: var(--card-radius);
+    text-align: center;
+    grid-column: 1 / -1;
+}
+
+dialog {
+    border: 0;
+    border-radius: var(--card-radius);
+    width: min(480px, calc(100% - 30px));
+    padding: 24px;
+    background: var(--surface-color);
+    color: var(--text-color);
+    box-shadow: 0 10px 40px #0003;
+}
+
+dialog::backdrop {
+    background: #14253699;
+}
+
+.close {
+    background: #64748b;
+    float: right;
+}
+
+footer {
+    display: flex;
+    justify-content: center;
+    gap: 22px;
+    color: var(--muted-color);
+    padding: 25px;
+    font-size: 13px;
+}
+
+footer a {
+    color: var(--accent-color);
+}
+
+@media (max-width: 600px) {
+    .appearance-controls {
+        align-items: stretch;
+        flex-direction: column;
+    }
+}
